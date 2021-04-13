@@ -1,0 +1,38 @@
+.chat_main{
+    min-height:85vh;
+    position: relative;
+
+}
+.chat_body{
+    position: relative;
+    max-height:65vh;
+    overflow-y: scroll
+}
+.chat_message{
+    position: relative;
+    font-size: 16;
+    padding: 10px;
+    background-color: ghostwhite;
+    border-radius: 10px;
+    width:fit-content;
+    margin-bottom:15px
+}
+.chat_name{
+    position: absolute;
+   top: 0;
+    font-size: xx-small;
+}
+.chat_time{
+    margin-left: 10px;
+       font-size: xx-small;
+}
+.chat_footer{
+  
+    bottom: 0;
+    position: absolute;
+}
+.message_sender{
+    margin-left: auto;
+    margin-right: 5px;
+    background-color: rgb(217, 255, 217);
+}
