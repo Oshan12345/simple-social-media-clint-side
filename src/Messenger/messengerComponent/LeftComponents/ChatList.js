@@ -25,7 +25,7 @@ const ChatList = ({ addNewChat, room }) => {
     <>
       <Link
         className="text-decoration-none"
-        to={`/messenger/chat/${id}/${room?._id}?name=${room?.name}`}
+        to={`/messenger/chat/${id}/${room?._id}?receiver=${room?.name}`}
       >
         <div className="d-flex justify-content-start mx-4">
           <img
