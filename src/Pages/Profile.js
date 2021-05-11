@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import MyPostsCard from "../Components/MyPostCard";
-
+import avater from "../images/avater.png";
 const Profile = () => {
   const [myProfileData, setMyProfileData] = useState({});
-
+  const [url, setUrl] = useState("");
+  const [photo, setPhoto] = useState("");
+  const [showInput, setShowInput] = useState(false);
   useEffect(() => {
     const { token, id } = JSON.parse(localStorage.getItem("instragram-jwt"));
     console.log(id);
@@ -30,24 +32,84 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         setMyProfileData(data);
+
         console.log("mty data--------------", data);
       });
   }, []);
   console.log(myProfileData);
+  const { id, token } = JSON.parse(localStorage.getItem("instragram-jwt"));
+  const uploadImg = (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "instragram-clone");
+    data.append("cloud_name", "oshan");
+
+    fetch("	https://api.cloudinary.com/v1_1/oshan/image/upload", {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((responseData) => {
+        //  console.log({ responseData });
+        console.log(responseData.url);
+        setPhoto(responseData.url);
+        updatePic(responseData.url);
+        setShowInput(false);
+        // photo && uploadPost(responseData.url);
+      });
+  };
+
+  const updatePic = (imageUrl) => {
+    fetch("/update-profile-pic", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        imageUrl,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
+  const toggleChangePicButton = (e) => {
+    e.preventDefault();
+    setShowInput(!showInput);
+  };
+
   return (
     <div>
       <div className="card mb-3 m-auto p-5 mt-3" style={{ maxWidth: "90%" }}>
         <div className="row g-0">
-          <div className="col-md-4">
-            <img
-              className="rounded-circle w-50"
-              src="https://images.unsplash.com/photo-1485893086445-ed75865251e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-              alt="..."
-            />
+          <div className="col-md-4 mb-5">
+            <form className="upload-profile-pic">
+              <img
+                src={photo || myProfileData.user?.profilePic}
+                style={{ borderRadius: "50%", height: 200, width: 200 }}
+                alt=""
+              />
+              {showInput && (
+                <input
+                  className="form-control form-control-sm"
+                  id="formFileSm"
+                  type="file"
+                  onChange={(e) => uploadImg(e.target.files[0])}
+                />
+              )}
+              <button
+                className="btn btn-info mt-4"
+                onClick={toggleChangePicButton}
+              >
+                {showInput ? "Cancel" : "  Change Profile pic"}
+              </button>
+            </form>
           </div>
-          <div className="col-md-8 ">
+          <div className="col-md-8 mt-4">
             <div className="card-body">
-              <h5 className="card-title">{myProfileData.user?.name}</h5>
               <div className="d-flex justify-content-between">
                 <p>{myProfileData.user?.followers.length} followers</p>
                 <p>{myProfileData.user?.followings?.length} followings</p>

@@ -16,3 +16,27 @@ code {
 a{
   color:black !important
 }
+
+.upload-profile-pic{
+  position: relative;
+ 
+    max-height: 180px;
+    max-width: 180px;
+}
+
+.upload-profile-pic > input{
+    border-radius: 50%;
+    height: 180px;
+    width: 180px;
+ 
+    opacity: .8;
+   padding:55px;
+    
+     text-align: center;
+  position: absolute;
+  top: 55%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  color: white;
+
+  }
