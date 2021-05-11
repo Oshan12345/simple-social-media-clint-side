@@ -26,6 +26,11 @@ const Navbar = () => {
             Create Post
           </Link>
         </li>,
+        <li className="nav-item mx-3 " key="n8">
+          <Link to="/myFollowingsPosts" className="text-decoration-none">
+            Followings Post
+          </Link>
+        </li>,
         <li className="nav-item mx-3 " key="n7">
           <Link to="/messenger" className="text-decoration-none">
             Chat

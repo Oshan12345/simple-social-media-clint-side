@@ -14,6 +14,7 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
 import MessengerHome from "./Messenger/MessengerHome";
 import UserProfile from "./Pages/UserProfile";
+import SubscribedUsersPost from "./Pages/SubscribedUsersPost";
 export const UserContext = createContext("");
 const Routing = () => {
   const history = useHistory();
@@ -49,6 +50,9 @@ const Routing = () => {
       <Route path="/signup">
         <SignUp />
       </Route>
+      <Route path="/user/:userId">
+        <UserProfile />
+      </Route>
       <Route path="/profile">
         <Profile />
       </Route>
@@ -58,8 +62,8 @@ const Routing = () => {
       <Route path="/messenger">
         <MessengerHome />
       </Route>
-      <Route path="/user/:userId">
-        <UserProfile />
+      <Route path="/myFollowingsPosts">
+        <SubscribedUsersPost />
       </Route>
     </Switch>
   );

@@ -2,20 +2,38 @@ import React, { useEffect, useState } from "react";
 import MyPostsCard from "../Components/MyPostCard";
 
 const Profile = () => {
-  const [myPosts, setMyPosts] = useState([]);
+  const [myProfileData, setMyProfileData] = useState({});
 
   useEffect(() => {
-    const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
-    fetch("/my-post", {
+    const { token, id } = JSON.parse(localStorage.getItem("instragram-jwt"));
+    console.log(id);
+
+    // fetch("/my-post", {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setMyProfileData(data.result);
+
+    //     console.log("sssssssssssssssssss", data);
+    //   });
+
+    fetch(`/user/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     })
       .then((res) => res.json())
-      .then((data) => setMyPosts(data.result));
+      .then((data) => {
+        setMyProfileData(data);
+        console.log("mty data--------------", data);
+      });
   }, []);
-  console.log(myPosts);
+  console.log(myProfileData);
   return (
     <div>
       <div className="card mb-3 m-auto p-5 mt-3" style={{ maxWidth: "90%" }}>
@@ -29,17 +47,17 @@ const Profile = () => {
           </div>
           <div className="col-md-8 ">
             <div className="card-body">
-              <h5 className="card-title">{myPosts[0]?.postedBy?.name}</h5>
+              <h5 className="card-title">{myProfileData.user?.name}</h5>
               <div className="d-flex justify-content-between">
-                <p>40 followers</p>
-                <p>40 followings</p>
-                <p>{myPosts.length} posts</p>
+                <p>{myProfileData.user?.followers.length} followers</p>
+                <p>{myProfileData.user?.followings?.length} followings</p>
+                <p>{myProfileData.posts?.length} posts</p>
               </div>
             </div>
           </div>
           <hr className="mt-5" />
           <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
-            {myPosts.map((post) => (
+            {myProfileData.posts?.map((post) => (
               <MyPostsCard post={post} key={post._id} />
             ))}
           </div>

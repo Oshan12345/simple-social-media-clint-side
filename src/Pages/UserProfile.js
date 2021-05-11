@@ -5,8 +5,11 @@ import MyPostsCard from "../Components/MyPostCard";
 const UserProfile = () => {
   let { userId } = useParams();
   console.log("heyy----------", userId);
-  const [userProfile, setUserProfile] = useState([]);
-
+  const [userProfile, setUserProfile] = useState({});
+  const [followers, setFollowers] = useState();
+  const [reload, setReload] = useState(true);
+  const [displayLike, setDisplayLike] = useState(true);
+  const [displayUnlike, setDisplayUnlike] = useState(false);
   const { id, token } = JSON.parse(localStorage.getItem("instragram-jwt"));
   console.log("id", id);
   useEffect(() => {
@@ -17,11 +20,24 @@ const UserProfile = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) => setUserProfile(data));
+      .then((data) => {
+        // console.log("ssssssssssssss----", data);
+
+        // if (data.user) {
+        //   console.log("jjjjjjjjjjjjjj");
+        // }
+        setUserProfile(data);
+        setFollowers(data.user.followers.length);
+        if (data.user?.followers?.includes(id)) {
+          setDisplayLike(!displayLike);
+          setDisplayUnlike(!displayUnlike);
+        }
+      });
   }, [userId, token]);
   console.log(userProfile);
 
   const followUser = () => {
+    // setReload(!reload);
     fetch("/follow", {
       method: "PUT",
       headers: {
@@ -35,12 +51,39 @@ const UserProfile = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        //  const x = [...followers, data.followers];
+        // setFollowers(data.followers.length);
+        // window.location.reload();
+        // setReload(!reload);
       });
   };
 
+  //new code for unfollow users
+
+  const unFollowUser = () => {
+    // setReload(!reload);
+    fetch("/unfollow", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        unFollowID: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("sagar------here is your data       ------>", data);
+        // const x = [...followers, data.followers];
+        // setFollowers(data.followers.length);
+        // window.location.reload();
+      });
+  };
+  //console.log(followers, followers.includes(id));
   return (
     <div>
-      {userProfile.length === 0 ? (
+      {!userProfile.user ? (
         <div className="m-auto mt-5 p-5" style={{ width: "fit-content" }}>
           <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
@@ -60,13 +103,68 @@ const UserProfile = () => {
               <div className="card-body">
                 <div className="d-flex">
                   <h5 className="card-title mx-4">{userProfile.user?.name}</h5>
-
-                  {userProfile?.user?.followers.includes(id) ? (
-                    <div className="d-flex justify-content-between align-items-center">
+                  {/*  */}
+                  {displayUnlike && (
+                    <div
+                      className="d-flex justify-content-between align-items-center"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        unFollowUser();
+                        setFollowers(followers - 1);
+                        setDisplayLike(!displayLike);
+                        setDisplayUnlike(!displayUnlike);
+                      }}
+                    >
                       <div
                         style={{
                           transform: "rotate(179deg)",
-                          cursor: "pointer",
+                        }}
+                      >
+                        <i class="bi bi-hand-index-thumb mx-1"></i>
+                      </div>
+                      Un-follow
+                    </div>
+                  )}
+
+                  {displayLike && (
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        followUser();
+                        setFollowers(followers + 1);
+                        setDisplayLike(!displayLike);
+                        setDisplayUnlike(!displayUnlike);
+                      }}
+                    >
+                      <i class="bi bi-hand-index-thumb mx-1"></i> Follow
+                    </div>
+                  )}
+
+                  {/*  */}
+                  {/* <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      followUser();
+                      setFollowers(followers + 1);
+                      setDisplayLike(!displayLike);
+                      setDisplayUnlike(!displayUnlike);
+                    }}
+                  >
+                    <i class="bi bi-hand-index-thumb mx-1"></i> Follow
+                  </div> */}
+                  {/*  */}
+                  {/* {userProfile?.user?.followers?.includes(id) && !reload ? (
+                    <div
+                      className="d-flex justify-content-between align-items-center"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        unFollowUser();
+                        setFollowers(followers - 1);
+                      }}
+                    >
+                      <div
+                        style={{
+                          transform: "rotate(179deg)",
                         }}
                       >
                         <i class="bi bi-hand-index-thumb mx-1"></i>
@@ -74,13 +172,21 @@ const UserProfile = () => {
                       Un-follow
                     </div>
                   ) : (
-                    <div style={{ cursor: "pointer" }} onClick={followUser}>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        followUser();
+                        setFollowers(followers + 1);
+                      }}
+                    >
                       <i class="bi bi-hand-index-thumb mx-1"></i> Follow
                     </div>
-                  )}
+                  )} */}
                 </div>
                 <div className="d-flex justify-content-between">
-                  <p>{userProfile?.user?.followers.length} followers</p>
+                  {/* <p>{userProfile?.user?.followers.length} followers</p>
+                  <p>{userProfile?.user?.followings?.length} followings</p> */}
+                  <p>{followers} followers</p>
                   <p>{userProfile?.user?.followings?.length} followings</p>
                   <p>{userProfile?.posts?.length} Post</p>
                 </div>
