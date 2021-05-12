@@ -21,12 +21,37 @@ const CreatePost = () => {
       .then((responseData) => {
         //  console.log({ responseData });
         console.log(responseData.url);
-        setPhoto(responseData.url);
-        // photo && uploadPost(responseData.url);
+        //   setPhoto(responseData.url);
+        postStatus(responseData.url);
       });
   };
-
   const tokenData = localStorage.getItem("instragram-jwt");
+  const postStatus = (photoUrl) => {
+    console.log("inside post function");
+    console.log("inside post phot", photo);
+
+    const { token } = JSON.parse(tokenData);
+    console.log("inside if function");
+    fetch("/make-post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        // title,
+        body,
+        photo: photoUrl,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("newpost has been created", data);
+        history.push("/");
+      })
+      .catch((err) => console.log({ err }));
+  };
+
   // const uploadPost = (pic) => {
   //   console.log(photo);
 
@@ -53,32 +78,32 @@ const CreatePost = () => {
   //       .catch((err) => console.log({ err }));
   //   }
   // };
-  useEffect(() => {
-    if (tokenData && photo) {
-      const { token } = JSON.parse(tokenData);
+  // useEffect(() => {
+  //   if (tokenData && photo) {
+  //     const { token } = JSON.parse(tokenData);
 
-      if (photo) {
-        fetch("/make-post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title,
-            body,
-            photo,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            history.push("/");
-          })
-          .catch((err) => console.log({ err }));
-      }
-    }
-  }, [photo, tokenData, body, title, history]);
+  //     if (photo) {
+  //       fetch("/make-post", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //         body: JSON.stringify({
+  //           // title,
+  //           body,
+  //           photo,
+  //         }),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log("newpost has been created", data);
+  //           history.push("/");
+  //         })
+  //         .catch((err) => console.log({ err }));
+  //     }
+  //   }
+  // }, [photo, tokenData, body, history]);
   // const uploadPost = () => {
   //   console.log(photo);
 
@@ -104,7 +129,11 @@ const CreatePost = () => {
   // };
   return (
     <div className="card m-auto mt-3 p-5" style={{ maxWidth: 500 }}>
-      <div className="mb-3">
+      <p className="p-3 text-center">
+        {" "}
+        Please make sure to fill both fields...
+      </p>
+      {/* <div className="mb-3">
         <label htmlFor="exampleFormControlTextarea1" className="form-label">
           Title
         </label>
@@ -114,10 +143,10 @@ const CreatePost = () => {
           rows="3"
           onBlur={(e) => setTitle(e.target.value)}
         ></textarea>
-      </div>
+      </div> */}
       <div className="mb-3">
         <label htmlFor="exampleFormControlTextarea1" className="form-label">
-          Body
+          Your feelings
         </label>
         <textarea
           className="form-control"

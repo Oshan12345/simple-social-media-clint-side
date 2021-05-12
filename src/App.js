@@ -15,6 +15,7 @@ import { initialState, reducer } from "./reducers/userReducer";
 import MessengerHome from "./Messenger/MessengerHome";
 import UserProfile from "./Pages/UserProfile";
 import SubscribedUsersPost from "./Pages/SubscribedUsersPost";
+import ResetPassword from "./Pages/ResetPassword";
 export const UserContext = createContext("");
 const Routing = () => {
   const history = useHistory();
@@ -28,7 +29,8 @@ const Routing = () => {
           const { name, email } = user;
           dispatch({ type: "USER", payload: { name, email } });
         } else {
-          history.push("/login");
+          !history.location.pathname.startsWith("/reset") &&
+            history.push("/login");
         }
       };
       redirect();
@@ -49,6 +51,12 @@ const Routing = () => {
       </Route>
       <Route path="/signup">
         <SignUp />
+      </Route>
+      <Route exact path="/reset">
+        <ResetPassword />
+      </Route>
+      <Route exact path="/reset/:resetToken">
+        <ResetPassword />
       </Route>
       <Route path="/user/:userId">
         <UserProfile />

@@ -38,7 +38,7 @@ const SignUp = () => {
         if (data.isSignedUp) {
           localStorage.setItem("instragram-jwt", JSON.stringify(data));
           setSignUpInfo({});
-          return history.push("/");
+          return history.push("/login");
         }
         // setIsDisplayMessage(true);
         tiggerMessage(data);
@@ -79,7 +79,7 @@ const SignUp = () => {
               fontWeight: 700,
             }}
           >
-            Instragram
+            Buddy-zone
           </legend>
           <div className=" position-relative">
             <label htmlFor="validationTooltip01" className="form-label">

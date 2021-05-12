@@ -29,11 +29,13 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        //console.log(data);
+        console.log("login data", data);
+
         if (data.isLoggedIn) {
           localStorage.setItem("instragram-jwt", JSON.stringify(data));
           setSignUpInfo({});
           dispatch({ type: "USER", payload: data });
+          console.log("this is state", state);
           return history.push("/");
         }
         handleLoginConfirmation(data);
@@ -74,7 +76,7 @@ const Login = () => {
               fontWeight: 700,
             }}
           >
-            Instragram
+            Buddy-zone
           </legend>
           <div className="mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
@@ -113,7 +115,10 @@ const Login = () => {
             Login
           </button>
         </form>
-        <Link to="/signup" className="text-center p-2">
+        <Link to="/reset" className="text-center p-1">
+          <p>Forgot Password? </p>
+        </Link>
+        <Link to="/signup" className="text-center p-1">
           <p>Don't have an account? Sign In</p>
         </Link>
       </div>

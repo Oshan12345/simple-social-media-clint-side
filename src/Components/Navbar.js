@@ -5,7 +5,7 @@ import { UserContext } from "../App";
 const Navbar = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
-  console.log(state);
+  console.log(" this is state", state);
   const handleLogOut = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("instragram-jwt");
@@ -63,11 +63,11 @@ const Navbar = () => {
           className="brand-logo black-text"
           style={{
             fontFamily: "Grand Hotel, cursive",
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: 700,
           }}
         >
-          <Link to={state ? "/" : "/login"}> Instragram</Link>
+          <Link to={state ? "/" : "/login"}> Buddy-zone</Link>
         </div>
         <button
           className="navbar-toggler"
