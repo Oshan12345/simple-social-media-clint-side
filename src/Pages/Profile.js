@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MyPostsCard from "../Components/MyPostCard";
+import Navbar from "../Components/Navbar";
 import avater from "../images/avater.png";
 const Profile = () => {
   const [myProfileData, setMyProfileData] = useState({});
@@ -83,6 +84,7 @@ const Profile = () => {
 
   return (
     <div>
+      <Navbar />
       <div className="card mb-3 m-auto p-5 mt-3" style={{ maxWidth: "90%" }}>
         <div className="row g-0">
           <div className="col-md-4 mb-5">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import MyPostsCard from "../Components/MyPostCard";
+import Navbar from "../Components/Navbar";
 
 const UserProfile = () => {
   let { userId } = useParams();
@@ -83,6 +84,7 @@ const UserProfile = () => {
   //console.log(followers, followers.includes(id));
   return (
     <div>
+      <Navbar />
       {!userProfile.user ? (
         <div className="m-auto mt-5 p-5" style={{ width: "fit-content" }}>
           <div class="spinner-border text-primary" role="status">

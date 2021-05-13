@@ -4,18 +4,11 @@ import "./Chats.css";
 import { animateScroll } from "react-scroll";
 import Pusher from "pusher-js";
 import { UserContext } from "../../../App";
-// import { css } from "@emotion/css";
-// import ScrollToBottom, { useScrollToBottom } from "react-scroll-to-bottom";
 
-// const ROOT_CSS = css({
-//   maxHeight: "60vh",
-//   overflow: "scroll",
-// });
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 const Chats = () => {
-  // const scrollToBottom = useScrollToBottom();
   const { state, dispatch } = useContext(UserContext);
   const { senderId, receiver } = useParams();
   const [message, setMessage] = useState("");
@@ -64,7 +57,7 @@ const Chats = () => {
       })
         .then((res) => res.json())
         .then((result) => {
-          // console.log("hello----------", result);
+          console.log("hello----------", result);
           setChatId(result.responseObj._id);
           setChats(result.responseObj?.messages);
           // console.log("ss----------->", result.responseObj._id);
@@ -136,11 +129,7 @@ const Chats = () => {
       <div className="chat_header d-flex justify-content-between align-items-top">
         <i className="bi bi-person-circle"></i>
         <div className="icon_right_side d-flex justify-content-end align-items-center">
-          <p className="mx-4">
-            {query.get("receiver")}
-            <br />
-            last seen
-          </p>
+          <p className="mx-4 fs-4">{query.get("receiver")}</p>
         </div>
       </div>
       <hr />
@@ -149,10 +138,11 @@ const Chats = () => {
 
         {chats.map((chat) => (
           <p
-            className={`chat_message ${
+            className={`chat_message  ${
               chat.sendBy?._id === id && "message_sender"
             }`}
             key={chat._id}
+            style={{ maxWidth: 250, overflowWrap: "anywhere" }}
           >
             {" "}
             <span className="chat_name">{chat?.sendBy?.name}</span>

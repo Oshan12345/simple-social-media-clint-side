@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import Navbar from "../Components/Navbar";
 
 const CreatePost = () => {
   const history = useHistory();
@@ -128,12 +129,15 @@ const CreatePost = () => {
   //     .catch((err) => console.log({ err }));
   // };
   return (
-    <div className="card m-auto mt-3 p-5" style={{ maxWidth: 500 }}>
-      <p className="p-3 text-center">
-        {" "}
-        Please make sure to fill both fields...
-      </p>
-      {/* <div className="mb-3">
+    <div>
+      <Navbar />
+
+      <div className="card m-auto mt-3 p-5" style={{ maxWidth: 500 }}>
+        <p className="p-3 text-center">
+          {" "}
+          Please make sure to fill both fields...
+        </p>
+        {/* <div className="mb-3">
         <label htmlFor="exampleFormControlTextarea1" className="form-label">
           Title
         </label>
@@ -144,36 +148,37 @@ const CreatePost = () => {
           onBlur={(e) => setTitle(e.target.value)}
         ></textarea>
       </div> */}
-      <div className="mb-3">
-        <label htmlFor="exampleFormControlTextarea1" className="form-label">
-          Your feelings
-        </label>
-        <textarea
-          className="form-control"
-          id="exampleFormControlTextarea1"
-          rows="3"
-          onBlur={(e) => setBody(e.target.value)}
-        ></textarea>
+        <div className="mb-3">
+          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+            Your feelings
+          </label>
+          <textarea
+            className="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            onBlur={(e) => setBody(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="formFileSm" className="form-label">
+            Upload Image
+          </label>
+          <input
+            className="form-control form-control-sm"
+            id="formFileSm"
+            type="file"
+            onChange={(e) => setUrl(e.target.files[0])}
+          />
+        </div>
+        <button
+          type="submit"
+          className="btn btn-primary w-100"
+          onClick={handlePost}
+        >
+          {" "}
+          Post
+        </button>
       </div>
-      <div className="mb-3">
-        <label htmlFor="formFileSm" className="form-label">
-          Upload Image
-        </label>
-        <input
-          className="form-control form-control-sm"
-          id="formFileSm"
-          type="file"
-          onChange={(e) => setUrl(e.target.files[0])}
-        />
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary w-100"
-        onClick={handlePost}
-      >
-        {" "}
-        Post
-      </button>
     </div>
   );
 };

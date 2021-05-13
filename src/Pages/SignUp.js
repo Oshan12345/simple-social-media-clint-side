@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Navbar from "../Components/Navbar";
 const SignUp = () => {
   const history = useHistory();
   const [signUpInfo, setSignUpInfo] = useState({
@@ -59,82 +60,85 @@ const SignUp = () => {
   };
 
   return (
-    <div className="card m-auto mt-5" style={{ maxWidth: 500 }}>
-      {isDisplayMessage && (
-        <div
-          className={`m-3 p-4 ${
-            displayMessage.isSignedUp ? "bg-success" : "bg-danger"
-          }`}
-        >
-          <p>{displayMessage.message}</p>
-        </div>
-      )}
-      <div className="card-body">
-        <form>
-          <legend
-            className="text-center"
-            style={{
-              fontFamily: "Grand Hotel, cursive",
-              fontSize: 18,
-              fontWeight: 700,
-            }}
+    <div>
+      <Navbar />
+      <div className="card m-auto mt-5" style={{ maxWidth: 500 }}>
+        {isDisplayMessage && (
+          <div
+            className={`m-3 p-4 ${
+              displayMessage.isSignedUp ? "bg-success" : "bg-danger"
+            }`}
           >
-            Buddy-zone
-          </legend>
-          <div className=" position-relative">
-            <label htmlFor="validationTooltip01" className="form-label">
-              First name
-            </label>
-            <input
-              type="text"
-              name="name"
-              onBlur={inputChange}
-              className="form-control form-control-sm"
-              id="validationTooltip01"
-              required
-            />
+            <p>{displayMessage.message}</p>
           </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              name="email"
-              onBlur={inputChange}
-              className="form-control form-control-sm"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-            <div id="emailHelp" className="form-text">
-              We'll never share your email with anyone else.
+        )}
+        <div className="card-body">
+          <form>
+            <legend
+              className="text-center"
+              style={{
+                fontFamily: "Grand Hotel, cursive",
+                fontSize: 18,
+                fontWeight: 700,
+              }}
+            >
+              Buddy-zone
+            </legend>
+            <div className=" position-relative">
+              <label htmlFor="validationTooltip01" className="form-label">
+                First name
+              </label>
+              <input
+                type="text"
+                name="name"
+                onBlur={inputChange}
+                className="form-control form-control-sm"
+                id="validationTooltip01"
+                required
+              />
             </div>
-          </div>
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              onBlur={inputChange}
-              className="form-control form-control-sm"
-              id="exampleInputPassword1"
-              required
-            />
-          </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                Email address
+              </label>
+              <input
+                type="email"
+                name="email"
+                onBlur={inputChange}
+                className="form-control form-control-sm"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+              <div id="emailHelp" className="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                onBlur={inputChange}
+                className="form-control form-control-sm"
+                id="exampleInputPassword1"
+                required
+              />
+            </div>
 
-          <button
-            type="submit"
-            onClick={(e) => handleSignUp(e)}
-            className="btn btn-primary w-100"
-          >
-            SignUp
-          </button>
-        </form>
-        <Link to="/login" className="text-center p-2">
-          <p>Already have an account? LogIn</p>
-        </Link>
+            <button
+              type="submit"
+              onClick={(e) => handleSignUp(e)}
+              className="btn btn-primary w-100"
+            >
+              SignUp
+            </button>
+          </form>
+          <Link to="/login" className="text-center p-2">
+            <p>Already have an account? LogIn</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

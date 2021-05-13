@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
+import Navbar from "../Components/Navbar";
 
 const SubscribedUsersPost = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -50,11 +51,15 @@ const SubscribedUsersPost = () => {
   };
 
   return (
-    <div className=" mt-5">
-      {/* <CreatePost /> */}
-      {allPosts.map((post) => (
-        <Card post={post} key={post._id} deletePost={deletePost} />
-      ))}
+    <div>
+      <Navbar />
+
+      <div className=" mt-5">
+        {/* <CreatePost /> */}
+        {allPosts.map((post) => (
+          <Card post={post} key={post._id} deletePost={deletePost} />
+        ))}
+      </div>
     </div>
   );
 };

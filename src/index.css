@@ -40,3 +40,11 @@ a{
   color: white;
 
   }
+ h3:first-letter, p:first-letter {
+    text-transform:capitalize;
+}
+
+.nav-item-style:hover{
+font-weight: 700;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
