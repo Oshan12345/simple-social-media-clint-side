@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { Link } from "react-router-dom";
-import Card from "../Components/Card";
 import Navbar from "../Components/Navbar";
-
+//import Card from "../Components/Card";
+const Card = React.lazy(() => import("../Components/Card"));
 const Home = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -69,7 +69,9 @@ const Home = () => {
         <div className="row g-0">
           <div className="col-md-8">
             {allPosts.map((post) => (
-              <Card post={post} key={post._id} deletePost={deletePost} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Card post={post} key={post._id} deletePost={deletePost} />
+              </Suspense>
             ))}
           </div>
 

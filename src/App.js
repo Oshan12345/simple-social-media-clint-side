@@ -1,20 +1,39 @@
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  Suspense,
+} from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useHistory,
 } from "react-router-dom";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
-import Profile from "./Pages/Profile";
-import CreatePost from "./Pages/CreatePost";
-import { createContext, useContext, useEffect, useReducer } from "react";
 import { initialState, reducer } from "./reducers/userReducer";
-import MessengerHome from "./Messenger/MessengerHome";
-import UserProfile from "./Pages/UserProfile";
-import SubscribedUsersPost from "./Pages/SubscribedUsersPost";
-import ResetPassword from "./Pages/ResetPassword";
+const Home = React.lazy(() => import("./Pages/Home"));
+const Login = React.lazy(() => import("./Pages/Login"));
+const SignUp = React.lazy(() => import("./Pages/SignUp"));
+const Profile = React.lazy(() => import("./Pages/Profile"));
+const CreatePost = React.lazy(() => import("./Pages/CreatePost"));
+const MessengerHome = React.lazy(() => import("./Messenger/MessengerHome"));
+const UserProfile = React.lazy(() => import("./Pages/UserProfile"));
+const SubscribedUsersPost = React.lazy(() =>
+  import("./Pages/SubscribedUsersPost")
+);
+const ResetPassword = React.lazy(() => import("./Pages/ResetPassword"));
+
+// import Home from "./Pages/Home";
+// import Login from "./Pages/Login";
+// import SignUp from "./Pages/SignUp";
+// import Profile from "./Pages/Profile";
+// import CreatePost from "./Pages/CreatePost";
+
+// import MessengerHome from "./Messenger/MessengerHome";
+// import UserProfile from "./Pages/UserProfile";
+// import SubscribedUsersPost from "./Pages/SubscribedUsersPost";
+// import ResetPassword from "./Pages/ResetPassword";
 export const UserContext = createContext("");
 const Routing = () => {
   const history = useHistory();
@@ -43,34 +62,54 @@ const Routing = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Home />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Home />
+        </Suspense>
       </Route>
       <Route path="/login">
-        <Login />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Login />
+        </Suspense>
       </Route>
       <Route path="/signup">
-        <SignUp />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SignUp />
+        </Suspense>
       </Route>
       <Route exact path="/reset">
-        <ResetPassword />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ResetPassword />
+        </Suspense>
       </Route>
       <Route exact path="/reset/:resetToken">
-        <ResetPassword />
+        <Suspense fallback={<div>Loading...</div>}>
+          <ResetPassword />
+        </Suspense>
       </Route>
       <Route path="/user/:userId">
-        <UserProfile />
+        <Suspense fallback={<div>Loading...</div>}>
+          <UserProfile />
+        </Suspense>
       </Route>
       <Route path="/profile">
-        <Profile />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Profile />
+        </Suspense>
       </Route>
       <Route path="/create-post">
-        <CreatePost />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CreatePost />
+        </Suspense>
       </Route>
       <Route path="/messenger">
-        <MessengerHome />
+        <Suspense fallback={<div>Loading...</div>}>
+          <MessengerHome />
+        </Suspense>
       </Route>
       <Route path="/myFollowingsPosts">
-        <SubscribedUsersPost />
+        <Suspense fallback={<div>Loading...</div>}>
+          <SubscribedUsersPost />
+        </Suspense>
       </Route>
     </Switch>
   );
