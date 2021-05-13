@@ -12,7 +12,7 @@ const Card = ({ post, deletePost }) => {
   }, [comments]);
 
   const likePost = (userId) => {
-    fetch("/like-post", {
+    fetch("https://mighty-springs-16344.herokuapp.com/like-post", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const Card = ({ post, deletePost }) => {
 
   const unLikePost = (post_id) => {
     const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
-    fetch("/unlike-post", {
+    fetch("https://mighty-springs-16344.herokuapp.com/unlike-post", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const Card = ({ post, deletePost }) => {
   };
 
   const postComment = (comment, postId) => {
-    fetch("/comment-to-post", {
+    fetch("https://mighty-springs-16344.herokuapp.com/comment-to-post", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

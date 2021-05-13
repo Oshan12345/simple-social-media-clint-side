@@ -12,17 +12,25 @@ const ResetPassword = () => {
   const handleResetRequest = (e) => {
     e.preventDefault();
 
-    handleAuthInfo("/change-password", "POST", { email }).then((data) => {
+    handleAuthInfo(
+      "https://mighty-springs-16344.herokuapp.com/change-password",
+      "POST",
+      { email }
+    ).then((data) => {
       setMessage(data.message);
     });
   };
 
   const handleResetPassword = (e) => {
     e.preventDefault();
-    handleAuthInfo("/update-password", "PUT", {
-      newPassword: password,
-      resetToken,
-    }).then((data) => {});
+    handleAuthInfo(
+      "https://mighty-springs-16344.herokuapp.com/update-password",
+      "PUT",
+      {
+        newPassword: password,
+        resetToken,
+      }
+    ).then((data) => {});
   };
 
   return (

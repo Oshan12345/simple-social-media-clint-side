@@ -19,7 +19,7 @@ const SignUp = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    fetch("/signUp", {
+    fetch("https://mighty-springs-16344.herokuapp.com/signUp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const CreatePost = () => {
   const postStatus = (photoUrl) => {
     const { token } = JSON.parse(tokenData);
 
-    fetch("/make-post", {
+    fetch("https://mighty-springs-16344.herokuapp.com/make-post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

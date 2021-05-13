@@ -10,7 +10,7 @@ const Profile = () => {
   useEffect(() => {
     const { token, id } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
-    fetch(`/user/${id}`, {
+    fetch(`https://mighty-springs-16344.herokuapp.com/user/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -42,7 +42,7 @@ const Profile = () => {
   };
 
   const updatePic = (imageUrl) => {
-    fetch("/update-profile-pic", {
+    fetch("https://mighty-springs-16344.herokuapp.com/update-profile-pic", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

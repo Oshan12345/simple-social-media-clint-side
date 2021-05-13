@@ -12,7 +12,7 @@ const Sidebar = () => {
     let mounted = true;
 
     mounted &&
-      fetch(`/following-list/${id}`, {
+      fetch(`https://mighty-springs-16344.herokuapp.com/following-list/${id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

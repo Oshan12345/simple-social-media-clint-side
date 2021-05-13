@@ -35,7 +35,7 @@ export default function SearchModal() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetch(`/search-user/${search}`)
+    fetch(`https://mighty-springs-16344.herokuapp.com/search-user/${search}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.length) {

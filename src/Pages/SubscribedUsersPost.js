@@ -11,7 +11,7 @@ const SubscribedUsersPost = () => {
     if (mounted && user) {
       const { token } = JSON.parse(user);
 
-      fetch("/get-followings-post", {
+      fetch("https://mighty-springs-16344.herokuapp.com/get-followings-post", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -31,13 +31,16 @@ const SubscribedUsersPost = () => {
   const deletePost = (postId) => {
     const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
-    fetch(`/delete-my-post/${postId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://mighty-springs-16344.herokuapp.com/delete-my-post/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const newPost = allPosts.filter((post) => postId !== post._id);

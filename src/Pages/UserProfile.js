@@ -14,7 +14,7 @@ const UserProfile = () => {
   const { id, token } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
   useEffect(() => {
-    fetch(`/user/${userId}`, {
+    fetch(`https://mighty-springs-16344.herokuapp.com/user/${userId}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const UserProfile = () => {
   }, [userId, token]);
 
   const followUser = () => {
-    fetch("/follow", {
+    fetch("https://mighty-springs-16344.herokuapp.com/follow", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +47,7 @@ const UserProfile = () => {
   };
 
   const unFollowUser = () => {
-    fetch("/unfollow", {
+    fetch("https://mighty-springs-16344.herokuapp.com/unfollow", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -27,12 +27,15 @@ const Chats = () => {
 
   useEffect(() => {
     const createChat = () => {
-      fetch(`/create-chat/${senderId}/${receiver}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      fetch(
+        `https://mighty-springs-16344.herokuapp.com/create-chat/${senderId}/${receiver}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((result) => {
           setChatId(result.responseObj._id);
@@ -60,7 +63,7 @@ const Chats = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    fetch("/continue-chat", {
+    fetch("https://mighty-springs-16344.herokuapp.com/continue-chat", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

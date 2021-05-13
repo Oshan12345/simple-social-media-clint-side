@@ -21,7 +21,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    fetch("/logIn", {
+    fetch("https://mighty-springs-16344.herokuapp.com/logIn", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

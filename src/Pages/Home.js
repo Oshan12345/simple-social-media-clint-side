@@ -16,9 +16,13 @@ const Home = () => {
   useEffect(() => {
     let mounted = true;
     if (mounted && user) {
-      fetchData("/get-posts").then((res) => setAllPosts(res.result));
+      fetchData("https://mighty-springs-16344.herokuapp.com/get-posts").then(
+        (res) => setAllPosts(res.result)
+      );
 
-      fetchData("/all-users").then((res) => setAllUsers(res.result));
+      fetchData("https://mighty-springs-16344.herokuapp.com/all-users").then(
+        (res) => setAllUsers(res.result)
+      );
     }
 
     return () => {
@@ -46,13 +50,16 @@ const Home = () => {
   const deletePost = (postId) => {
     const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
-    fetch(`/delete-my-post/${postId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://mighty-springs-16344.herokuapp.com/delete-my-post/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const newPost = allPosts.filter((post) => postId !== post._id);
