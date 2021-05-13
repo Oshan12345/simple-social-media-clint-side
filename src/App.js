@@ -1,4 +1,3 @@
-import Navbar from "./Components/Navbar";
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,7 +39,7 @@ const Routing = () => {
       mounted = false;
     };
   }, [history, dispatch]);
-  //ekane dispatch ta delete korbo problem hole
+
   return (
     <Switch>
       <Route exact path="/">
@@ -83,7 +82,6 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <Router>
-        {/* <Navbar /> */}
         <Routing />
       </Router>
     </UserContext.Provider>

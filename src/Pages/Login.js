@@ -30,13 +30,11 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("login data", data);
-
         if (data.isLoggedIn) {
           localStorage.setItem("instragram-jwt", JSON.stringify(data));
           setSignUpInfo({});
           dispatch({ type: "USER", payload: data });
-          console.log("this is state", state);
+
           return history.push("/");
         }
         handleLoginConfirmation(data);

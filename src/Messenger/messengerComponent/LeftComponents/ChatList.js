@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const ChatList = ({ addNewChat, room }) => {
-  console.log("divya", room);
   const imageStyle = {
     maxHeight: 30,
     maxWidth: 30,
     borderRadius: "50%",
     objectFit: "contain",
   };
-  const createChat = () => {
-    const name = prompt("please enter a name");
-    console.log("hi");
-    console.log(name);
-    if (name) {
-    } else {
-    }
-  };
+  // const createChat = () => {
+  //   const name = prompt("please enter a name");
+  //   console.log("hi");
+  //   console.log(name);
+  //   if (name) {
+  //   } else {
+  //   }
+  // };
 
   const { id } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
-  console.log({ id });
   return (
     <>
       <Link

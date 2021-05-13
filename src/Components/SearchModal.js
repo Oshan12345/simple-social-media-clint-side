@@ -53,7 +53,6 @@ export default function SearchModal() {
       console.log("Enter pressed");
       handleSearch(e);
     }
-    //it triggers by pressing the enter key
   };
   function closeModal() {
     setIsOpen(false);
@@ -62,11 +61,11 @@ export default function SearchModal() {
   return (
     <div className="" style={{ zIndex: 500 }}>
       <i
-        class="bi bi-search"
+        className="bi bi-search"
         onClick={openModal}
         style={{ cursor: "pointer" }}
       ></i>
-      {/* <button onClick={openModal}></button> */}
+
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -75,14 +74,14 @@ export default function SearchModal() {
         contentLabel="Example Modal"
       >
         <i
-          class="bi bi-x-circle-fill text-primary p-2"
+          className="bi bi-x-circle-fill text-primary p-2"
           onClick={closeModal}
           style={{ position: "absolute", top: 0, right: 0, cursor: "pointer" }}
         ></i>
 
-        <form class="d-flex mt-4" onSubmit={handleSearch}>
+        <form className="d-flex mt-4" onSubmit={handleSearch}>
           <input
-            class="form-control me-2"
+            className="form-control me-2"
             type="search"
             placeholder="Search for your buddy."
             aria-label="Search"
@@ -90,14 +89,14 @@ export default function SearchModal() {
             required
             onKeyPress={handleKeypress}
           />
-          <input class="btn btn-outline-info" type="submit" />
+          <input className="btn btn-outline-info" type="submit" />
         </form>
         {message && <p className="text-center m-1">{message}</p>}
         <div className="mt-5">
-          <ul class="list-group input-group-sm">
+          <ul className="list-group input-group-sm">
             {searchResult.map((user) => (
               <li
-                class="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action"
                 key={user._id}
                 onClick={closeModal}
               >

@@ -17,13 +17,6 @@ const SignUp = () => {
   };
 
   const handleSignUp = (e) => {
-    // if (
-    //   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    //     signUpInfo.email
-    //   )
-    // ) {
-    //
-    // }
     e.preventDefault();
 
     fetch("/signUp", {
@@ -35,19 +28,13 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.isSignedUp) {
           localStorage.setItem("instragram-jwt", JSON.stringify(data));
           setSignUpInfo({});
           return history.push("/login");
         }
-        // setIsDisplayMessage(true);
+
         tiggerMessage(data);
-        // if (data.message === "User already there with this email") {
-        //   setTimeout(() => {
-        //     history.push("/login");
-        //   }, 5000);
-        // }
       });
   };
 

@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MyPostsCard from "../Components/MyPostCard";
 import Navbar from "../Components/Navbar";
-import avater from "../images/avater.png";
+
 const Profile = () => {
   const [myProfileData, setMyProfileData] = useState({});
-  const [url, setUrl] = useState("");
+
   const [photo, setPhoto] = useState("");
   const [showInput, setShowInput] = useState(false);
   useEffect(() => {
     const { token, id } = JSON.parse(localStorage.getItem("instragram-jwt"));
-    console.log(id);
-
-    // fetch("/my-post", {
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${token}`,
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setMyProfileData(data.result);
-
-    //     console.log("sssssssssssssssssss", data);
-    //   });
 
     fetch(`/user/${id}`, {
       headers: {
@@ -33,11 +19,9 @@ const Profile = () => {
       .then((res) => res.json())
       .then((data) => {
         setMyProfileData(data);
-
-        console.log("mty data--------------", data);
       });
   }, []);
-  console.log(myProfileData);
+
   const { id, token } = JSON.parse(localStorage.getItem("instragram-jwt"));
   const uploadImg = (image) => {
     const data = new FormData();
@@ -51,12 +35,9 @@ const Profile = () => {
     })
       .then((res) => res.json())
       .then((responseData) => {
-        //  console.log({ responseData });
-        console.log(responseData.url);
         setPhoto(responseData.url);
         updatePic(responseData.url);
         setShowInput(false);
-        // photo && uploadPost(responseData.url);
       });
   };
 
@@ -72,9 +53,7 @@ const Profile = () => {
       }),
     })
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-      });
+      .then((data) => {});
   };
 
   const toggleChangePicButton = (e) => {

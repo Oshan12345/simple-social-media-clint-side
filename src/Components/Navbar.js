@@ -6,7 +6,7 @@ import SearchModal from "./SearchModal";
 const Navbar = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
-  console.log(" this is state", state);
+
   const handleLogOut = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("instragram-jwt");

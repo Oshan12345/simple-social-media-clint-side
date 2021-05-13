@@ -13,7 +13,6 @@ const ResetPassword = () => {
     e.preventDefault();
 
     handleAuthInfo("/change-password", "POST", { email }).then((data) => {
-      console.log("hello from reset", data);
       setMessage(data.message);
     });
   };
@@ -23,25 +22,13 @@ const ResetPassword = () => {
     handleAuthInfo("/update-password", "PUT", {
       newPassword: password,
       resetToken,
-    }).then((data) => {
-      console.log("update data", data);
-    });
+    }).then((data) => {});
   };
 
-  console.log(resetToken);
   return (
     <div>
       <Navbar />
       <div className="card m-auto mt-5" style={{ maxWidth: 500 }}>
-        {/* {isDisplayMessage && (
-          <div
-            className={`m-3 p-4 ${
-              displayMessage.isSignedUp ? "bg-success" : "bg-danger"
-            }`}
-          >
-            <p>{displayMessage.message}</p>
-          </div>
-        )} */}
         <div className="card-body">
           <form>
             <legend

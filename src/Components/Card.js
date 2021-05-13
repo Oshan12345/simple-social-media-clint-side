@@ -6,7 +6,7 @@ const Card = ({ post, deletePost }) => {
   const [like, setLike] = useState(likedBy);
   const { id, token } = JSON.parse(localStorage.getItem("instragram-jwt"));
   const [postComments, setPostComment] = useState([]);
-  console.log("hey---", id, postedBy._id);
+
   useEffect(() => {
     setPostComment(comments);
   }, [comments]);
@@ -24,8 +24,6 @@ const Card = ({ post, deletePost }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         setLike(data.likedBy);
       });
   };
@@ -44,8 +42,6 @@ const Card = ({ post, deletePost }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         setLike(data.likedBy);
       });
   };
@@ -64,23 +60,9 @@ const Card = ({ post, deletePost }) => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         setPostComment(result.comments);
       });
   };
-
-  // const deletePost = (postId) => {
-  //   console.log(postId);
-  //   fetch(`/delete-my-post/${postId}`, {
-  //     method: "DELETE",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => console.log(data));
-  // };
 
   return (
     <div>
@@ -150,7 +132,6 @@ const Card = ({ post, deletePost }) => {
                 </p>
               </div>
             ))}
-            {/* {comments.map((comment) => {})} */}
           </div>
           <div className="form-floating">
             <form
@@ -164,7 +145,6 @@ const Card = ({ post, deletePost }) => {
                 className="form-control"
                 placeholder="Leave a comment here"
                 id="floatingTextarea"
-                //  onBlur={(e) => setComment(e.target.value)}
               ></textarea>
 
               <div className="d-flex mt-1">

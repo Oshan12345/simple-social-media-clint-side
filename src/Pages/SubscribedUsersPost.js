@@ -19,8 +19,6 @@ const SubscribedUsersPost = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-
           setAllPosts(data.result);
         });
     }
@@ -32,7 +30,7 @@ const SubscribedUsersPost = () => {
 
   const deletePost = (postId) => {
     const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
-    console.log(postId);
+
     fetch(`/delete-my-post/${postId}`, {
       method: "DELETE",
       headers: {
@@ -42,10 +40,8 @@ const SubscribedUsersPost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(allPosts);
         const newPost = allPosts.filter((post) => postId !== post._id);
-        console.log(newPost);
-        console.log(data);
+
         setAllPosts(newPost);
       });
   };
@@ -55,7 +51,6 @@ const SubscribedUsersPost = () => {
       <Navbar />
 
       <div className=" mt-5">
-        {/* <CreatePost /> */}
         {allPosts.map((post) => (
           <Card post={post} key={post._id} deletePost={deletePost} />
         ))}

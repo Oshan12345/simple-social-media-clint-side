@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import Navbar from "../Components/Navbar";
 
 const CreatePost = () => {
   const history = useHistory();
-  const [title, setTitle] = useState("");
+
   const [body, setBody] = useState("");
-  const [photo, setPhoto] = useState("");
   const [url, setUrl] = useState("");
   const handlePost = () => {
     const data = new FormData();
@@ -20,19 +19,13 @@ const CreatePost = () => {
     })
       .then((res) => res.json())
       .then((responseData) => {
-        //  console.log({ responseData });
-        console.log(responseData.url);
-        //   setPhoto(responseData.url);
         postStatus(responseData.url);
       });
   };
   const tokenData = localStorage.getItem("instragram-jwt");
   const postStatus = (photoUrl) => {
-    console.log("inside post function");
-    console.log("inside post phot", photo);
-
     const { token } = JSON.parse(tokenData);
-    console.log("inside if function");
+
     fetch("/make-post", {
       method: "POST",
       headers: {
@@ -47,87 +40,11 @@ const CreatePost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("newpost has been created", data);
         history.push("/");
       })
       .catch((err) => console.log({ err }));
   };
 
-  // const uploadPost = (pic) => {
-  //   console.log(photo);
-
-  //   const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
-
-  //   if (photo) {
-  //     fetch("/make-post", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //       body: JSON.stringify({
-  //         title,
-  //         body,
-  //         photo: pic || photo,
-  //       }),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         console.log("saggggaaaar", data);
-  //         history.push("/");
-  //       })
-  //       .catch((err) => console.log({ err }));
-  //   }
-  // };
-  // useEffect(() => {
-  //   if (tokenData && photo) {
-  //     const { token } = JSON.parse(tokenData);
-
-  //     if (photo) {
-  //       fetch("/make-post", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify({
-  //           // title,
-  //           body,
-  //           photo,
-  //         }),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log("newpost has been created", data);
-  //           history.push("/");
-  //         })
-  //         .catch((err) => console.log({ err }));
-  //     }
-  //   }
-  // }, [photo, tokenData, body, history]);
-  // const uploadPost = () => {
-  //   console.log(photo);
-
-  //   const { token } = JSON.parse(localStorage.getItem("instragram-jwt"));
-
-  //   fetch("/create-post", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify({
-  //       title,
-  //       body,
-  //       photo,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     })
-  //     .catch((err) => console.log({ err }));
-  // };
   return (
     <div>
       <Navbar />
@@ -137,17 +54,7 @@ const CreatePost = () => {
           {" "}
           Please make sure to fill both fields...
         </p>
-        {/* <div className="mb-3">
-        <label htmlFor="exampleFormControlTextarea1" className="form-label">
-          Title
-        </label>
-        <textarea
-          className="form-control"
-          id="exampleFormControlTextarea1"
-          rows="3"
-          onBlur={(e) => setTitle(e.target.value)}
-        ></textarea>
-      </div> */}
+
         <div className="mb-3">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             Your feelings

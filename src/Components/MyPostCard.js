@@ -1,7 +1,7 @@
 import React from "react";
 
 const MyPostsCard = ({ post }) => {
-  const { body, photo, title, postedBy } = post;
+  const { body, photo, title } = post;
   return (
     <div className="col">
       <div className="card h-100">
