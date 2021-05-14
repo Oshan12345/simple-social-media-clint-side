@@ -11,6 +11,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [isDisplayDemoLoginInfo, setIsDisplayDemoLogin] = useState(false);
   const [displayMessage, setDisplayMessage] = useState({});
   const [isDisplayMessage, setIsDisplayMessage] = useState(false);
   const inputChange = (e) => {
@@ -123,6 +124,36 @@ const Login = () => {
           <Link to="/signup" className="text-center p-1">
             <p>Don't have an account? Sign In</p>
           </Link>
+
+          <div>
+            <button
+              className="btn btn-info w-100 mb-4"
+              onClick={() => setIsDisplayDemoLogin(!isDisplayDemoLoginInfo)}
+            >
+              {isDisplayDemoLoginInfo
+                ? "Hide demo login info."
+                : "Show demo login info."}
+            </button>
+            {isDisplayDemoLoginInfo && (
+              <div className="container overflow-hidden mb-5">
+                <div className="row gx-2">
+                  <div className="col">
+                    <div className="p-1 border rounded bg-info">
+                      Email: oshan@gamil.com <br />
+                      Password: oshan
+                    </div>
+                  </div>
+                  <div className="col ">
+                    <div className="p-1  border rounded bg-info">
+                      Email: soma5674@gmail.com
+                      <br />
+                      Password: soma
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
