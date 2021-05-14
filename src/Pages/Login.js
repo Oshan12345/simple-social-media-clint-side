@@ -137,12 +137,6 @@ const Login = () => {
             {isDisplayDemoLoginInfo && (
               <div className="container overflow-hidden mb-5">
                 <div className="row gx-2">
-                  <div className="col">
-                    <div className="p-1 border rounded bg-info">
-                      Email: oshan@gamil.com <br />
-                      Password: oshan
-                    </div>
-                  </div>
                   <div className="col ">
                     <div className="p-1  border rounded bg-info">
                       Email: soma5674@gmail.com
