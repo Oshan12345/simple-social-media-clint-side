@@ -72,12 +72,20 @@ const Home = () => {
     <div>
       <Navbar />
 
+      {allPosts.length === 0 && (
+        <div className="loading-spinner">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+
       <div className="card mb-3">
         <div className="row g-0">
           <div className="col-md-8">
             {allPosts.map((post) => (
-              <Suspense fallback={<div>Loading...</div>}>
-                <Card post={post} key={post._id} deletePost={deletePost} />
+              <Suspense fallback={<div>Loading...</div>} key={post._id}>
+                <Card post={post} deletePost={deletePost} />
               </Suspense>
             ))}
           </div>
