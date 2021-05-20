@@ -105,11 +105,13 @@ const Card = ({ post, deletePost }) => {
               <i
                 className="bi bi-hand-thumbs-down mx-2"
                 onClick={() => unLikePost(_id)}
+                style={{ cursor: "pointer" }}
               ></i>
             ) : (
               <i
                 className="bi bi-hand-thumbs-up mx-2"
                 onClick={() => likePost(_id)}
+                style={{ cursor: "pointer" }}
               ></i>
             )}
           </div>

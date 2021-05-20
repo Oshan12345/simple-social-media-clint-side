@@ -14,6 +14,7 @@ const Login = () => {
   const [isDisplayDemoLoginInfo, setIsDisplayDemoLogin] = useState(false);
   const [displayMessage, setDisplayMessage] = useState({});
   const [isDisplayMessage, setIsDisplayMessage] = useState(false);
+  const [waitingMessage, setWaitingMessage] = useState("");
   const inputChange = (e) => {
     const userInfo = { ...signUpInfo };
     userInfo[e.target.name] = e.target.value;
@@ -21,7 +22,7 @@ const Login = () => {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-
+    setWaitingMessage("Please wait for a while....");
     fetch("https://mighty-springs-16344.herokuapp.com/logIn", {
       method: "POST",
       headers: {
@@ -45,6 +46,7 @@ const Login = () => {
 
   const handleLoginConfirmation = (data) => {
     setDisplayMessage(data);
+    setWaitingMessage("");
     data.isLoggedIn === false && triggerMessage();
   };
   const triggerMessage = () => {
@@ -60,6 +62,16 @@ const Login = () => {
       <Navbar />
 
       <div className="card m-auto mt-5" style={{ maxWidth: 500 }}>
+        {waitingMessage && (
+          <div class="p-2 bg-info">
+            <span
+              class="spinner-border spinner-border-sm me-5"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            {waitingMessage}
+          </div>
+        )}
         {isDisplayMessage && (
           <div
             className={`m-3 p-4 ${
