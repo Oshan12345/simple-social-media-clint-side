@@ -30,7 +30,9 @@ const ResetPassword = () => {
         newPassword: password,
         resetToken,
       }
-    ).then((data) => {});
+    ).then((data) => {
+      setMessage(data.message);
+    });
   };
 
   return (
