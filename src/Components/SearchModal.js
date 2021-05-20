@@ -32,6 +32,7 @@ export default function SearchModal() {
   function afterOpenModal() {
     // references are now sync'd and can be accessed.
   }
+  const { id } = JSON.parse(localStorage.getItem("instragram-jwt"));
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ export default function SearchModal() {
       .then((res) => res.json())
       .then((data) => {
         if (data.length) {
-          setSearchResult(data);
+          setSearchResult(data.filter((user) => user._id !== id));
           setMessage("Your search result");
         } else {
           setMessage("Oops!! no result is found. ");
@@ -50,7 +51,6 @@ export default function SearchModal() {
 
   const handleKeypress = (e) => {
     if (e.key === "Enter") {
-      console.log("Enter pressed");
       handleSearch(e);
     }
   };
