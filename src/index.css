@@ -57,3 +57,14 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transform: translate(-50%, -50%);
   color: white;
 }
+
+.delete-btn{
+      position: absolute;
+    top: -12px;
+    z-index: 2323;
+    right: 2px;
+    padding: 12px;
+    background: #d9dfff;
+    border-radius: 39%;
+    cursor: pointer;
+}
